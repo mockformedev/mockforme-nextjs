@@ -1,5 +1,72 @@
 @import "tailwindcss";
 
+h1 {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+a {
+  color: blue;
+}
+
+.bg-primary {
+  background-color: #0d83ff!important;
+  color: #fff;
+}
+
+.bg-secondary {
+  background-color: #6c757d!important;
+  color: #eee;
+}
+
+.bg-tertiary {
+  background-color: #FF640F!important;
+  color: #fff;
+}
+
+.main-heading {
+  padding: 10px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.tag-line {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.inline-highlight {
+  background-color: #eef2fa;
+  padding: 0px 5px;
+  border-radius: 5px;
+}
+
+.highlight {
+  background-color: #eef2fa;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -23,4 +90,102 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.center {
+  margin: auto;
+  text-align: center
+}
+
+.docs {
+  margin: 30px;
+}
+
+.bg-docs {
+  background-color: #a3c9ff;
+  border-radius: 10px;
+  padding: 20px
+}
+
+.steps .sub-steps {
+  margin-left: 15px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px 10px;
+  border-radius: 10px;;
+}
+
+.message {
+  color: #fff;
+  min-height: 30px;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 4px;
+  line-height: 30px;
+}
+
+.message.success {
+  background-color: #198754;
+}
+
+.message.error {
+  background-color: #dc3545;
+}
+
+.btn {
+  border: 1px solid;
+  border-radius: 8px;
+  font-size: 12px;
+  padding: 5px 15px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 200px;
+  text-align: center;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 800px;
+  margin: auto;
+}
+
+.product {
+  max-width: 300px;
+  width: 210px;
+  height: 360px;
+  padding: 5px;
+  box-shadow: -1px 1px 4px 2px #eee;
+  margin-bottom: 10px;
+}
+
+.product h2 {
+  background-color: pink;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
+
+
+.product .price {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px
+}
+
+.product .img-container {
+  background-color: #eee;
+}
+
+.product .img-container .img {
+  max-height: 200px;
+  max-width: 100%;
+  min-height: 200px;
+  object-fit: contain;
+  margin: auto;
 }

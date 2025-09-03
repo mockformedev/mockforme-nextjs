@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MockForMe Example with Next.js (CSR + SSR) - in only 4 lines of code.
+
+This repository demonstrates how to integrate **MockForMe** with Next.js using both **Client-Side Rendering (CSR)** and **Server-Side Rendering (SSR)**.
+
+With MockForMe, you can easily **simulate APIs without setting up a backend**, making it perfect for rapid frontend development, testing, and prototyping.
+
+- No server setup required
+- Works seamlessly with CSR + SSR
+- Speeds up development & testing
+
+This project is bootstrapped with **Next.js** and requires **Node.js v20**.
+
 
 ## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Step 1. Install NextJs
+```
+npx create-next-app@latest mockforme-nextjs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Step 2. Run Application
+```npm
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Step 3. MockForMe Integration
+#### Install the package with YARN or NPM
+```
+yarn add mockforme -D
+```
+```
+npm i mockforme --save-dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Step 4. Create `.env` file and add `mockforme` Access Token
+NEXT_PUBLIC_MFM_API_TOKEN=ADD_ACCESS_TOKEN_HERE
+> **Note:** Don’t include the access token directly in your code. Instead, keep it in a .env file and ensure that file is ignored by Git.
 
-## Learn More
+### Step 5. Create a new file at `src/app/components/mockformeClient.js` to set up client-side initialization for the `mockforme` package.
+> **Note:** Add `"use client";` at the very top of the file to ensure it runs in the client environment.
+```
+"use client";
 
-To learn more about Next.js, take a look at the following resources:
+import { mockforme } from "mockforme";
+import { useEffect } from "react";
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+export const InitMockForMeClient = () => {
+  if (process.env.NODE_ENV === "development") {
+    /**
+     * Read the access token from process.env file
+     */
+    const TOKEN = process.env.NEXT_PUBLIC_MFM_API_TOKEN;
 
-## Deploy on Vercel
+    if (!TOKEN) {
+      console.error("MockForMe token is missing in .env file");
+      return;
+    }
+    useEffect(() => {
+      try {
+        mockforme(TOKEN).run((apis => {
+          console.log(apis);
+        }));
+      } catch (err) {
+        console.log("<err>", err);
+      }
+    }, [])
+  }
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Step 6. Set up SSR and CSR with `mockforme` by importing it at the top of `src/app/layout.js`
+- Import the component that uses `mockforme` for client-side rendering (CSR).
+- Set up and initialize `mockforme` for server-side rendering (SSR).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+// For Server side rendering
+import { mockforme as mockformeServer } from "mockforme/server";
+
+// For Client side rendering
+import { InitMockForMeClient } from "@/app/components/mockformeClient";
+
+if (process.env.NODE_ENV === "development") {
+  /**
+   * Read the access token from process.env file
+   */
+  const TOKEN = process.env.NEXT_PUBLIC_MFM_API_TOKEN;
+  
+  if (TOKEN) {
+    try {
+      mockformeServer(TOKEN).run((apiMappings) => {
+        console.log("<mockforme apiMappings>", apiMappings);
+      }, (err) => {
+        console.log("<mockforme error>", err);
+      });
+    } catch (err) {
+      console.log("Error in mockforme server initialisation", err);
+    }
+  }
+}
+```
+In the same `src/app/layout.js` file, also include the `mockforme` client-side package.
+```
+...
+...
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {
+          /*
+          * Added InitMockForMeClient for client side mockforme integration.
+          */
+        }
+        <InitMockForMeClient />
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+That's it `mockforme` CSR + SSR integration is done, now lets test it, using simple ProductList component initially that will render server side and on clicking on Load more button it loads the more products client side.
+
+- Create a file `src/app/components/ProductList.js` for `ProductList` component
+  > -  The ProductList component receives initialData as props and renders the list of products on the page.
+  > -  It also manages the "load more" functionality to fetch additional products.
+  > -  Additionally, it integrates the AddToCart component, which makes an HTTP request to add a product to the cart.
+- Create a file `/src/app/components/AddToCart.js` for add to cart, it manage Add to cart functionaility.
+- Create a file `src/app/components/Button.js` for Button component
+- Create a new file at `src/app/products/page.js` to handle server-side loading of the `ProductList` component. Add the following code:
+  ```
+  import { ProductList } from "@/app/components/ProductList";
+
+  export default async function Products() {
+    const res = await fetch("https://www.myexample.com/products", {
+      cache: "no-store", // ensures fresh data each request (like getServerSideProps)
+    });
+    const data = await res.json();
+
+    return <ProductList initialData={data} />;
+  }
+  ```
