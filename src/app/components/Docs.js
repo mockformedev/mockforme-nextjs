@@ -15,6 +15,19 @@ export default function Docs() {
         <span className="highlight bg-success ms-2">Done</span>
       </p> */}
 
+      <div>
+        <h3>
+          Check the pull request for installation and configuration details of
+          MockForMe (CSR + SSR):
+        </h3>
+        <a
+          href="https://github.com/mockformedev/mockforme-nextjs/pull/1/files"
+          target="_blank"
+        >
+          https://github.com/mockformedev/mockforme-nextjs/pull/1/files
+        </a>
+      </div>
+
       <p>
         With MockForMe, you can easily{" "}
         <b>simulate APIs without setting up a backend</b>, making it perfect for
@@ -67,11 +80,13 @@ export default function Docs() {
       </div>
       <div className="steps">
         <h3>
-          Step 4. Create <code className="inline-highlight">.env</code> file and add <code className="inline-highlight">mockforme</code> Access Token
+          Step 4. Create <code className="inline-highlight">.env</code> file and
+          add <code className="inline-highlight">mockforme</code> Access Token
         </h3>
         <div className="sub-steps">
           <div className="highlight">
-            <strong>NEXT_PUBLIC_MFM_API_TOKEN</strong>=MOCKFORME_ACCESS_TOKEN_HERE
+            <strong>NEXT_PUBLIC_MFM_API_TOKEN</strong>
+            =MOCKFORME_ACCESS_TOKEN_HERE
           </div>
           <p className="bg-yellow-100 p-2 rounded-md shadow-md mt-2">
             <b>Note:</b> Don’t include the access token directly in your code.
@@ -84,7 +99,11 @@ export default function Docs() {
         <h3>Step 5. Client Setup</h3>
         <div className="sub-steps">
           <p>
-            Create <code className="highlight">src/app/components/mockformeClient.js</code> and add:
+            Create{" "}
+            <code className="highlight">
+              <a href="https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/components/mockformeClient.js" target="_blank">src/app/components/mockformeClient.js</a>
+            </code>{" "}
+            and add:
           </p>
           <div className="highlight">
             <pre>
@@ -124,7 +143,9 @@ export default function Docs() {
         <h3>Step 6. Setup SSR + CSR</h3>
         <div className="sub-steps">
           <p>
-            In <code className="highlight">src/app/layout.js</code>
+            In <code className="highlight">
+              <a href="https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/layout.js" target="_blank">src/app/layout.js</a>
+            </code>
           </p>
           <div className="highlight">
             <pre>
@@ -167,7 +188,10 @@ export default function RootLayout({ children }) {
         <h3>Step 7. ProductList Example</h3>
         <div className="sub-steps">
           <p>
-            <code className="highlight">src/app/components/ProductList.js</code> Example Server side rendering ProductList component
+            <code className="highlight">
+              <a href="https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/components/ProductList.js" target="_blank">src/app/components/ProductList.js</a>
+            </code>{" "}
+            Example Server side rendering ProductList component
           </p>
           <div className="highlight">
             <pre>

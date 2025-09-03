@@ -10,6 +10,8 @@ With MockForMe, you can easily **simulate APIs without setting up a backend**, m
 
 This project is bootstrapped with **Next.js** and requires **Node.js v20**.
 
+# Check the pull request for installation and configuration details of MockForMe (CSR + SSR):
+[https://github.com/mockformedev/mockforme-nextjs/pull/1/files](https://github.com/mockformedev/mockforme-nextjs/pull/1/files)
 
 ## Getting Started
 
@@ -33,10 +35,10 @@ npm i mockforme --save-dev
 ```
 
 ### Step 4. Create `.env` file and add `mockforme` Access Token
-NEXT_PUBLIC_MFM_API_TOKEN=ADD_ACCESS_TOKEN_HERE
+`NEXT_PUBLIC_MFM_API_TOKEN`=ADD_ACCESS_TOKEN_HERE
 > **Note:** Don’t include the access token directly in your code. Instead, keep it in a .env file and ensure that file is ignored by Git.
 
-### Step 5. Create a new file at `src/app/components/mockformeClient.js` to set up client-side initialization for the `mockforme` package.
+### Step 5. Create a new file at [`src/app/components/mockformeClient.js`](https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/components/mockformeClient.js) to set up client-side initialization for the `mockforme` package.
 > **Note:** Add `"use client";` at the very top of the file to ensure it runs in the client environment.
 ```
 "use client";
@@ -69,7 +71,7 @@ export const InitMockForMeClient = () => {
 }
 ```
 
-### Step 6. Set up SSR and CSR with `mockforme` by importing it at the top of `src/app/layout.js`
+### Step 6. Set up SSR and CSR with `mockforme` by importing it at the top of [`src/app/layout.js`](https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/layout.js)
 - Import the component that uses `mockforme` for client-side rendering (CSR).
 - Set up and initialize `mockforme` for server-side rendering (SSR).
 
@@ -99,7 +101,7 @@ if (process.env.NODE_ENV === "development") {
   }
 }
 ```
-In the same `src/app/layout.js` file, also include the `mockforme` client-side package.
+In the same [`src/app/layout.js`](https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/layout.js) file, also include the `mockforme` client-side package.
 ```
 ...
 ...
@@ -123,13 +125,13 @@ export default function RootLayout({ children }) {
 ```
 That's it `mockforme` CSR + SSR integration is done, now lets test it, using simple ProductList component initially that will render server side and on clicking on Load more button it loads the more products client side.
 
-- Create a file `src/app/components/ProductList.js` for `ProductList` component
+- Create a file [`src/app/components/ProductList.js`](https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/components/ProductList.js) for `ProductList` component
   > -  The ProductList component receives initialData as props and renders the list of products on the page.
   > -  It also manages the "load more" functionality to fetch additional products.
   > -  Additionally, it integrates the AddToCart component, which makes an HTTP request to add a product to the cart.
-- Create a file `/src/app/components/AddToCart.js` for add to cart, it manage Add to cart functionaility.
-- Create a file `src/app/components/Button.js` for Button component
-- Create a new file at `src/app/products/page.js` to handle server-side loading of the `ProductList` component. Add the following code:
+- Create a file [`/src/app/components/AddToCart.js`](https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/components/AddToCart.js) for add to cart, it manage Add to cart functionaility.
+- Create a file [`src/app/components/Button.js`](https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/components/Button.js) for Button component
+- Create a new file at [`src/app/products/page.js`](https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/products/page.js) to handle server-side loading of the `ProductList` component. Add the following code:
   ```
   import { ProductList } from "@/app/components/ProductList";
 
@@ -142,3 +144,32 @@ That's it `mockforme` CSR + SSR integration is done, now lets test it, using sim
     return <ProductList initialData={data} />;
   }
   ```
+
+# Key Takeaways
+## Integrate mockforme Client side and server side
+
+### Installation
+```npm
+  npm install mockforme --save-dev
+```
+```yarn
+  yarn add mockforme -D
+```
+
+### Import package Server side & initialisation
+```
+import { mockforme } from "mockforme/sever";
+
+mockforme("ACCESS_TOKEN").run((mockedApis) => {
+  console.log("mockedApis", mockedApis);
+})
+```
+
+### Import package Client side & initialisation
+```
+import { mockforme } from "mockforme";
+
+mockforme("ACCESS_TOKEN").run((mockedApis) => {
+  console.log("mockedApis", mockedApis);
+})
+```
