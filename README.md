@@ -13,7 +13,20 @@ This project is bootstrapped with **Next.js** and requires **Node.js v20**.
 # Check the pull request for installation and configuration details of MockForMe (CSR + SSR):
 [https://github.com/mockformedev/mockforme-nextjs/pull/1/files](https://github.com/mockformedev/mockforme-nextjs/pull/1/files)
 
-## Getting Started
+## Checkout the project, add `mockforme` token in `.env` file and run the project using following instructions:
+> 1. git clone https://github.com/mockformedev/mockforme-nextjs.git
+>
+> 1.  Add `mockforme` Access Token in `.env` file
+>
+> 1. Run command in terminal `yarn install` OR `npm install` inside the project
+> 
+> 1. Run the project using `yarn dev` OR `npm run dev`
+>
+> 1. And visit http://localhost:3000/products
+
+> Note: you can get the access token from mockforme dashboard: [https://dashboard.mockforme.com/user/token](https://dashboard.mockforme.com/user/token)
+
+## Step-by-Step Instructions to Setup the Project
 
 ### Step 1. Install NextJs
 ```

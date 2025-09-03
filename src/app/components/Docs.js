@@ -45,7 +45,21 @@ export default function Docs() {
         <b>Node.js v20</b>.
       </p>
 
-      <h2>Getting Started</h2>
+      <div>
+        <div className="steps">
+          <h3>Run the project</h3>
+          <div className="sub-steps">
+            <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
+              <li>Add `mockforme` Access Token in `.env` file</li>
+              <li>Run command in terminal `yarn install` OR `npm install` inside the project</li>
+              <li>Run the project using `yarn dev` OR `npm run dev`</li>
+              <li>And visit http://localhost:3000/products</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <h2>Step-by-Step Instructions to Setup the Project</h2>
       <div className="steps">
         <h3>Step 1. Install NextJs</h3>
         <div className="sub-steps">
