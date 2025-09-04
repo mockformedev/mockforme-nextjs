@@ -158,6 +158,11 @@ That's it `mockforme` CSR + SSR integration is done, now lets test it, using sim
   }
   ```
 
+# JSON Sample Data for APIs
+`/products` [Product API JSON data](https://github.com/mockformedev/mockforme-nextjs/blob/master/products.json)
+
+`/cart` [Cart API JSON data](https://github.com/mockformedev/mockforme-nextjs/blob/master/cart.json)
+
 # Key Takeaways
 ## Integrate mockforme Client side and server side
 
