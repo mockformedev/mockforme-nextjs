@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "kiko milano",
+    "description": "A premium Italian cosmetics brand known for vibrant colors and long-lasting products.",
+    "image": "https://picsum.photos/id/1011/400/400",
+    "price": 899
+  },
+  {
+    "id": "2",
+    "name": "nykaa",
+    "description": "India’s leading beauty retailer offering a wide range of affordable makeup and skincare products.",
+    "image": "https://picsum.photos/id/1012/400/400",
+    "price": 499
+  },
+  {
+    "id": "3",
+    "name": "revlon",
+    "description": "An iconic global brand offering timeless makeup essentials and innovative beauty solutions.",
+    "image": "https://picsum.photos/id/1013/400/400",
+    "price": 749
+  }
+]
