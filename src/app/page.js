@@ -63,6 +63,22 @@ mockforme("ACCESS_TOKEN").run((mockedApis) => {
                 </pre>
               </div>
             </div>
+            <hr className="mt-5" />
+            <div className="steps mt-5">  
+              <h4 className="text-uppercase">
+                JSON Sample Data for APIs
+              </h4>
+              <div className="mt-2">
+                <a href="https://github.com/mockformedev/mockforme-nextjs/blob/master/products.json" target="_blank">
+                  <code className="inline-highlight">/products</code> [Product API JSON data]
+                </a>
+              </div>
+              <div>
+                <a href="https://github.com/mockformedev/mockforme-nextjs/blob/master/cart.json" target="_blank">
+                  <code className="inline-highlight">/cart</code> [Cart API JSON data]
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </main>
