@@ -11,8 +11,7 @@ npm run dev
 ```
 Access page: [http://localhost:3000](http://localhost:3000)
 
-### Step 3. MockForMe Integration
-#### Install the package with YARN or NPM
+### Step 3. Install the package with YARN or NPM
 ```
 yarn add mockforme -D
 ```
@@ -22,6 +21,8 @@ npm i mockforme --save-dev
 
 ### Step 4. Create `.env` file and add `mockforme` Access Token
 `NEXT_PUBLIC_MFM_API_TOKEN`=ADD_ACCESS_TOKEN_HERE
+
+Get Access Token from [MockForMe Access Token](https://dashboard.mockforme.com/user/token)
 
 ### Step 5. Client Setup
 #### Create a new file at [`src/app/mockforme-client.js`](https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/mockforme-client.js) to set up client-side initialization.
@@ -133,3 +134,5 @@ export default async function Product() {
 2. Works seamlessly with CSR + SSR
 3. Speeds up development & testing
 
+## Topics
+server-side-api-mocking · ssr-api-mocking · nextjs-ssr · mock-api · mock-server · mockforme
