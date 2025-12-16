@@ -6,8 +6,14 @@ export default function Docs() {
   return (
     <div className="gap-[15px] flex flex-col">
       <h1 className="heading">
-        MockForMe Example with Next.js (CSR + SSR) - in only 4 lines of code.
+        MockForMe + Next.js (CSR + SSR) Integration
       </h1>
+      <a
+        href="https://github.com/mockformedev/mockforme-nextjs/pull/1/files"
+        target="_blank"
+      >
+        Checkout code from github
+      </a>
       {/* <p>
         <span className="highlight bg-primary">install mockforme</span>
         <span className="highlight bg-secondary ms-2">import mockforme</span>
@@ -15,51 +21,6 @@ export default function Docs() {
         <span className="highlight bg-success ms-2">Done</span>
       </p> */}
 
-      <div>
-        <h3>
-          Check the pull request for installation and configuration details of
-          MockForMe (CSR + SSR):
-        </h3>
-        <a
-          href="https://github.com/mockformedev/mockforme-nextjs/pull/1/files"
-          target="_blank"
-        >
-          https://github.com/mockformedev/mockforme-nextjs/pull/1/files
-        </a>
-      </div>
-
-      <p>
-        With MockForMe, you can easily{" "}
-        <b>simulate APIs without setting up a backend</b>, making it perfect for
-        rapid frontend development, testing, and prototyping.
-      </p>
-
-      <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-        <li className="tracking-[-.01em]">No server setup required</li>
-        <li className="tracking-[-.01em]">Works seamlessly with CSR + SSR</li>
-        <li>Speeds up development &amp; testing</li>
-      </ol>
-
-      <p>
-        This project is bootstrapped with <b>Next.js</b> and requires{" "}
-        <b>Node.js v20</b>.
-      </p>
-
-      <div>
-        <div className="steps">
-          <h3>Run the project</h3>
-          <div className="sub-steps">
-            <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-              <li>Add `mockforme` Access Token in `.env` file</li>
-              <li>Run command in terminal `yarn install` OR `npm install` inside the project</li>
-              <li>Run the project using `yarn dev` OR `npm run dev`</li>
-              <li>And visit http://localhost:3000/products</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-
-      <h2>Step-by-Step Instructions to Setup the Project</h2>
       <div className="steps">
         <h3>Step 1. Install NextJs</h3>
         <div className="sub-steps">
@@ -75,13 +36,14 @@ export default function Docs() {
           <pre>
             <code>npm run dev</code>
           </pre>
+          <br />
+          Access page: <a href="http://localhost:3000">http://localhost:3000</a>
         </div>
       </div>
 
       <div className="steps">
-        <h3>Step 3. MockForMe Integration</h3>
+        <h3>Step 3. Install `mockforme` NPM package</h3>
         <div className="sub-steps">
-          <p>Install the package</p>
           <div className="mt-5">
             With <code className="highlight">Yarn</code>
             <div className="highlight mb-3">yarn add mockforme -D</div>
@@ -115,37 +77,31 @@ export default function Docs() {
           <p>
             Create{" "}
             <code className="highlight">
-              <a href="https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/components/mockformeClient.js" target="_blank">src/app/components/mockformeClient.js</a>
+              <a href="https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/mockforme-client.js" target="_blank">src/app/mockforme-client.js</a>
             </code>{" "}
             and add:
           </p>
           <div className="highlight">
             <pre>
+              <strong>
+                <code>
+                  {`
+"use client"
+
+import { mockforme } from "mockforme";
+`}
+                </code>
+              </strong>
               <code>
                 {`
-  "use client";
+const TOKEN = process.env.NEXT_PUBLIC_MFM_API_TOKEN;
 
-  import { mockforme } from "mockforme";
-  import { useEffect } from "react";
-
-  export const InitMockForMeClient = () => {
-    if (process.env.NODE_ENV === "development") {
-      const TOKEN = process.env.NEXT_PUBLIC_MFM_API_TOKEN;
-      if (!TOKEN) {
-        console.error("MockForMe token is missing in .env file");
-        return;
-      }
-      useEffect(() => {
-        try {
-          mockforme(TOKEN).run((apis) => {
-            console.log(apis);
-          });
-        } catch (err) {
-          console.log("<err>", err);
-        }
-      }, []);
-    }
-  };
+mockforme(TOKEN).run((apis, rules) => {
+  console.log("Mocked Apis", apis);
+  console.log("Mocked Rules", rules);
+}, (err) => {
+  console.log("MockForMe Error", err);
+});
 `}
               </code>
             </pre>
@@ -154,7 +110,43 @@ export default function Docs() {
       </div>
 
       <div className="steps">
-        <h3>Step 6. Setup SSR + CSR</h3>
+        <h3>Step 6. SSR Setup</h3>
+        <div className="sub-steps">
+          <p>
+            Create{" "}
+            <code className="highlight">
+              <a href="https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/mockforme-server.js" target="_blank">src/app/mockforme-server.js</a>
+            </code>{" "}
+            and add:
+          </p>
+          <div className="highlight">
+            <pre>
+              <strong>
+                <code>
+                  {`
+import { mockforme } from "mockforme/server";
+`}
+                </code>
+              </strong>
+              <code>
+                {`
+const TOKEN = process.env.NEXT_PUBLIC_MFM_API_TOKEN;
+
+mockforme(TOKEN).run((apiMappings, rules) => {
+  console.log("<MockedApis>", apiMappings);
+  console.log("<MockedRules>", rules);
+}, (err) => {
+  console.log("<mockforme error>", err);
+});
+`}
+              </code>
+            </pre>
+          </div>
+        </div>
+      </div>
+
+      <div className="steps">
+        <h3>Step 7. Import `mockforme-client` and `mockforme-server` in layout.js</h3>
         <div className="sub-steps">
           <p>
             In <code className="highlight">
@@ -163,64 +155,111 @@ export default function Docs() {
           </p>
           <div className="highlight">
             <pre>
-              <code>{`// For SSR
-import { mockforme as mockformeServer } from "mockforme/server";
+              <strong>
+                <code>{`
+import "./mockforme-client";
+import "./mockforme-server";
+                `}</code>
+              </strong>
+              <code>{`
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
 
-// For CSR
-import { InitMockForMeClient } from "@/app/components/mockformeClient";
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
 
-if (process.env.NODE_ENV === "development") {
-  const TOKEN = process.env.NEXT_PUBLIC_MFM_API_TOKEN;
-  if (TOKEN) {
-    try {
-      mockformeServer(TOKEN).run((apiMappings) => {
-        console.log("<mockforme apiMappings>", apiMappings);
-      }, (err) => {
-        console.log("<mockforme error>", err);
-      });
-    } catch (err) {
-      console.log("Error in mockforme server initialisation", err);
-    }
-  }
-}
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata = {
+  title: "Create Next App",
+  description: "Generated by create next app",
+};
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <InitMockForMeClient />
         {children}
       </body>
     </html>
   );
-}`}</code>
+}
+
+              `}</code>
             </pre>
           </div>
         </div>
       </div>
       <div className="steps">
-        <h3>Step 7. ProductList Example</h3>
+        <h3>Step 8. Inside src/app/page.js get product data and pass to ProductList component</h3>
         <div className="sub-steps">
           <p>
             <code className="highlight">
-              <a href="https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/components/ProductList.js" target="_blank">src/app/components/ProductList.js</a>
+              <a href="https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/page.js" target="_blank">src/app/page.js</a>
             </code>{" "}
             Example Server side rendering ProductList component
           </p>
           <div className="highlight">
             <pre>
-              <code>{`import { ProductList } from "@/app/components/ProductList";
+              <code>{`
+import { ProductList } from "@/app/components/ProductList";
 
-export default async function Products() {
-  const res = await fetch("https://www.myexample.com/products", {
-    cache: "no-store", // like getServerSideProps
-  });
-  const data = await res.json();
-
-  return <ProductList initialData={data} />;
-}`}</code>
+export default async function Product() {
+  try {
+    const res = await fetch("https://www.myexample.com/products", {
+      cache: "no-store",
+    });
+    const data = await res.json();
+    return (
+      <div>
+        <ProductList initialData={data} />
+      </div>
+    );
+  } catch (err) {
+    console.log("<err>", err);
+    return <ProductList initialData={[]} />;
+  }
+}
+              `}</code>
             </pre>
           </div>
+        </div>
+      </div>
+
+      <div>
+        <div className="steps">
+          <h3>Run the project</h3>
+          <div className="sub-steps">
+            <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
+              <li>Add `mockforme` Access Token in `.env` file</li>
+              <li>Run command in terminal `yarn install` OR `npm install` inside the project</li>
+              <li>Run the project using `yarn dev` OR `npm run dev`</li>
+              <li>And visit http://localhost:3000</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div className="steps">
+        <h3>Key takeaways</h3>
+        <div className="sub-steps">
+          <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
+            <li className="tracking-[-.01em]">No server setup required</li>
+            <li className="tracking-[-.01em]">Works seamlessly with CSR + SSR</li>
+            <li>Speeds up development &amp; testing</li>
+          </ol>
+
+          <br />
+          <hr />
+          <p>
+            This project is bootstrapped with <b>Next.js</b> and requires{" "}
+            <b>NodeJs v20</b>.
+          </p>
         </div>
       </div>
     </div>

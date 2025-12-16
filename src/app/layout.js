@@ -1,25 +1,9 @@
 /**
  * Initialise mockforme on top of the page
  */
-import { mockforme as mockformeServer } from "mockforme/server";
 
-import { InitMockForMeClient } from "@/app/components/mockformeClient";
-
-if (process.env.NODE_ENV === "development") {
-  const TOKEN = process.env.NEXT_PUBLIC_MFM_API_TOKEN;
-  
-  if (TOKEN) {
-    try {
-      mockformeServer(TOKEN).run((apiMappings) => {
-        console.log("<mockforme apiMappings>", apiMappings);
-      }, (err) => {
-        console.log("<mockforme error>", err);
-      });
-    } catch (err) {
-      console.log("Error in mockforme server initialisation", err);
-    }
-  }
-}
+import "./mockforme-client";
+import "./mockforme-server";
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -45,7 +29,6 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <InitMockForMeClient />
         {children}
       </body>
     </html>
