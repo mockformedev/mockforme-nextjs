@@ -21,8 +21,6 @@ if (process.env.NODE_ENV === "development") {
   }
 }
 
-// console.log("<TOKEN>", TOKEN);
-
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
