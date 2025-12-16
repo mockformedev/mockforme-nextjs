@@ -62,23 +62,11 @@ import { useEffect } from "react";
 
 export const InitMockForMeClient = () => {
   if (process.env.NODE_ENV === "development") {
-    /**
-     * Read the access token from process.env file
-     */
     const TOKEN = process.env.NEXT_PUBLIC_MFM_API_TOKEN;
-
-    if (!TOKEN) {
-      console.error("MockForMe token is missing in .env file");
-      return;
-    }
     useEffect(() => {
-      try {
-        mockforme(TOKEN).run((apis => {
-          console.log(apis);
-        }));
-      } catch (err) {
-        console.log("<err>", err);
-      }
+      mockforme(TOKEN).run((apis => {
+        console.log(apis);
+      }));
     }, [])
   }
 }
@@ -96,22 +84,12 @@ import { mockforme as mockformeServer } from "mockforme/server";
 import { InitMockForMeClient } from "@/app/components/mockformeClient";
 
 if (process.env.NODE_ENV === "development") {
-  /**
-   * Read the access token from process.env file
-   */
   const TOKEN = process.env.NEXT_PUBLIC_MFM_API_TOKEN;
-  
-  if (TOKEN) {
-    try {
-      mockformeServer(TOKEN).run((apiMappings) => {
-        console.log("<mockforme apiMappings>", apiMappings);
-      }, (err) => {
-        console.log("<mockforme error>", err);
-      });
-    } catch (err) {
-      console.log("Error in mockforme server initialisation", err);
-    }
-  }
+  mockformeServer(TOKEN).run((apiMappings) => {
+    console.log("<mockforme apiMappings>", apiMappings);
+  }, (err) => {
+    console.log("<mockforme error>", err);
+  });
 }
 ```
 In the same [`src/app/layout.js`](https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/layout.js) file, also include the `mockforme` client-side package.
@@ -149,9 +127,7 @@ That's it `mockforme` CSR + SSR integration is done, now lets test it, using sim
   import { ProductList } from "@/app/components/ProductList";
 
   export default async function Products() {
-    const res = await fetch("https://www.myexample.com/products", {
-      cache: "no-store", // ensures fresh data each request (like getServerSideProps)
-    });
+    const res = await fetch("https://www.myexample.com/products", {});
     const data = await res.json();
 
     return <ProductList initialData={data} />;
