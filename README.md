@@ -29,17 +29,17 @@ Get Access Token from [MockForMe Access Token](https://dashboard.mockforme.com/u
 > **Note:** Add `"use client";` at the very top of the file to ensure it runs in the client environment.
 ```
 "use client"
+import { useEffect } from "react";
 
 import { mockforme } from "mockforme";
 
-const TOKEN = process.env.NEXT_PUBLIC_MFM_API_TOKEN;
+export default function MockForMeClient() {
+  useEffect(() => {
+    mockforme().run();
+  }, []);
 
-mockforme(TOKEN).run((apis, rules) => {
-  console.log("Mocked Apis", apis);
-  console.log("Mocked Rules", rules);
-}, (err) => {
-  console.log("MockForMe Error", err);
-});
+  return null;
+}
 ```
 
 ### Step 6. SSR Setup
@@ -63,7 +63,7 @@ mockforme(TOKEN).run((apiMappings, rules) => {
 ### Step 7. Import `mockforme-client` and `mockforme-server` in layout.js
 [`src/app/layout.js`](https://github.com/mockformedev/mockforme-nextjs/blob/master/src/app/layout.js) file.
 ```
-import "./mockforme-client";
+import MockForMeClient from "./mockforme-client";
 import "./mockforme-server";
                 
 import { Geist, Geist_Mono } from "next/font/google";
@@ -88,6 +88,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <MockForMeClient />
         {children}
       </body>
     </html>

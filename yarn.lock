@@ -543,10 +543,10 @@ mkdirp@^3.0.1:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-3.0.1.tgz#e44e4c5607fb279c168241713cc6e0fea9adcb50"
   integrity sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg==
 
-mockforme@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/mockforme/-/mockforme-4.2.1.tgz#b35c500a9200234f13f9a6921bbdae411497ad18"
-  integrity sha512-LzFcSFw8ZUhc2eLvEMswjULBIpkhW0ScuSdedzENjx1STK0AjJUwJHkcJG0pPywIr6ENNUaytG3p7F4s3tVpmA==
+mockforme@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/mockforme/-/mockforme-5.0.0.tgz#80005f0405e9c7623de444157a9b628272c10876"
+  integrity sha512-hLfdz3Nvo0OFK6fm1JtM9a2oYwsA3ZqbMPrnmTRMlFWtHotHfI/+7QDSvsNwiO9C5eaVVqo5r1Pvo5JIH5fbKQ==
 
 nanoid@^3.3.11, nanoid@^3.3.6:
   version "3.3.11"

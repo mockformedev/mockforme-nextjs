@@ -2,7 +2,7 @@
  * Initialise mockforme on top of the page
  */
 
-import "./mockforme-client";
+import MockForMeClient from "./mockforme-client";
 import "./mockforme-server";
 
 import { Geist, Geist_Mono } from "next/font/google";
@@ -29,6 +29,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <MockForMeClient />
         {children}
       </body>
     </html>
