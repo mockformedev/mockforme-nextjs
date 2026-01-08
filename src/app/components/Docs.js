@@ -94,14 +94,13 @@ import { mockforme } from "mockforme";
               </strong>
               <code>
                 {`
-const TOKEN = process.env.NEXT_PUBLIC_MFM_API_TOKEN;
+export default function MockForMeClient() {
+  useEffect(() => {
+    mockforme().run();
+  }, []);
 
-mockforme(TOKEN).run((apis, rules) => {
-  console.log("Mocked Apis", apis);
-  console.log("Mocked Rules", rules);
-}, (err) => {
-  console.log("MockForMe Error", err);
-});
+  return null;
+}
 `}
               </code>
             </pre>
@@ -157,7 +156,7 @@ mockforme(TOKEN).run((apiMappings, rules) => {
             <pre>
               <strong>
                 <code>{`
-import "./mockforme-client";
+import MockForMeClient from "./mockforme-client";
 import "./mockforme-server";
                 `}</code>
               </strong>
@@ -184,6 +183,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <MockForMeClient />
         {children}
       </body>
     </html>

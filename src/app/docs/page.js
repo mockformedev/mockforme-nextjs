@@ -56,9 +56,7 @@ mockforme("ACCESS_TOKEN").run((mockedApis) => {
                   <code>{`
 import { mockforme } from "mockforme";
 
-mockforme("ACCESS_TOKEN").run((mockedApis) => {
-  console.log("mockedApis", mockedApis);
-})
+mockforme().run();
 `}</code>
                 </pre>
               </div>
