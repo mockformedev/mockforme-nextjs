@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack -p 8080",
     "build": "next build --turbopack",
-    "start": "next start"
+    "start": "next start -p 8080"
   },
   "dependencies": {
-    "mockforme": "^5.0.0",
+    "mockforme": "^14.5.1",
     "next": "15.5.2",
     "react": "19.1.0",
     "react-dom": "19.1.0"

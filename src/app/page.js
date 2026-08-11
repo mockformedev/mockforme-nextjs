@@ -1,8 +1,14 @@
 import { ProductList } from "@/app/components/ProductList";
 
+export const dynamic = "force-dynamic";
+
 export default async function Product() {
   try {
     const res = await fetch("https://www.myexample.com/products", {
+      cache: "no-store",
+    });
+
+    const res1 = await fetch("https://jsonplaceholder.typicode.com/users", {
       cache: "no-store",
     });
     const data = await res.json();
